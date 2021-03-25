@@ -3,7 +3,7 @@
 
 # Note download is handled by the ome.deploy_archive dependency
 
-- name: zeroc ice | dependencies
+- name: zeroc ice | dependencies for Ubuntu 18
   become: true
   apt:
     name:
@@ -12,3 +12,23 @@
       - libexpat1
       - libmcpp0
       - openssl
+  when:
+    - ansible_os_family | lower == 'debian'
+    - ansible_distribution_major_version == '18'
+    
+- name: zeroc ice | dependencies for ubuntu 20
+  become: true
+  apt:
+    name:
+      - build-essential
+      - db5.3-util
+      - libbz2-dev
+      - libdb++-dev
+      - libdb-dev
+      - libexpat-dev
+      - libmcpp-dev
+      - libssl-dev
+      - zlib1g-dev
+  when:
+    - ansible_os_family | lower == 'debian'
+    - ansible_distribution_major_version == '20'       
